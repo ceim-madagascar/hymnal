@@ -21,7 +21,7 @@ def create_app(test_config=None):
         pass
 
     @app.route("/")
-    def song_list():
+    def hymn_list():
         songs = [
             ("a-celui-qui-nous-aime", "À celui qui nous aime"),
             ("a-dieu-soit-la-gloire", "À Dieu soit la gloire"),
@@ -31,6 +31,9 @@ def create_app(test_config=None):
                 "Béni l'Éternel, mon âme",
             ),
         ]
-        return render_template("songs_list.html", songs=songs)
+        return render_template("hymn_list.html", songs=songs)
+
+    from . import db
+    db.init_app(app)
 
     return app
