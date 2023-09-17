@@ -47,3 +47,25 @@ def create_hymn():
             db.commit()
             return redirect(url_for("hymns.hymn_list"))
     return render_template("create_hymn.html")
+
+
+@bp.route("/slide/<string:slug>", methods=["GET"])
+def slide(slug: str):
+    db = get_db()
+    song = db.execute(
+        "SELECT title, slug, content FROM hymns WHERE slug = ?", (slug,)
+    ).fetchone()
+    if song is None:
+        abort(404, f"Hymn {slug} doesn't exist.")
+    slides = []
+    current_slide = []
+    for line in song["content"].split("\n"):
+        line = line.strip()
+        if line == "":
+            if current_slide:
+                slides.append(current_slide)
+            current_slide = []
+        else:
+            current_slide.append(line)
+
+    return render_template("slide.html", song=song, slides=slides)

@@ -6,7 +6,9 @@
   <ul>
     {% for song in songs %}
       <li>
-        {{ song.1 }}
+        <a href="{{ url_for('hymns.slide', slug=song['slug']) }}">
+          {{ song['title'] }}
+        </a> 
       </li>
     {% endfor %}
   </ul>
