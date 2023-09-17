@@ -20,20 +20,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route("/")
-    def hymn_list():
-        songs = [
-            ("a-celui-qui-nous-aime", "À celui qui nous aime"),
-            ("a-dieu-soit-la-gloire", "À Dieu soit la gloire"),
-            ("beni-soit-le-lien", "Béni soit le lien"),
-            (
-                "beni-l-eternel-mon-ame",
-                "Béni l'Éternel, mon âme",
-            ),
-        ]
-        return render_template("hymn_list.html", songs=songs)
-
     from . import db
     db.init_app(app)
+    from . import hymns
+    app.register_blueprint(hymns.bp)
+    app.add_url_rule("/", endpoint="hymn_list")
 
     return app

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Songs List</title>
+{% extends 'base.html' %}
+{% block header %}
+  <h1>{% block title %}Songs List{% endblock title %}</h1>
+{% endblock header %}
+{% block content %}
   <ul>
     {% for song in songs %}
       <li>
@@ -9,4 +10,4 @@
       </li>
     {% endfor %}
   </ul>
-</html>
+{% endblock content %}

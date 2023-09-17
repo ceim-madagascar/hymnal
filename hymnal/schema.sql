@@ -11,7 +11,7 @@ CREATE TABLE users (
 -- create a hymn table with id, title, and content --
 CREATE TABLE hymns (
   id SERIAL PRIMARY KEY,
-    slug VARCHAR(255) UNIQUE NOT NULL,
+  slug VARCHAR(255) UNIQUE NOT NULL,
   title VARCHAR(255) NOT NULL,
   content TEXT NOT NULL
 );
