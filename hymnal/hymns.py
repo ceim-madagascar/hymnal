@@ -46,7 +46,35 @@ def create_hymn():
             )
             db.commit()
             return redirect(url_for("hymns.hymn_list"))
-    return render_template("create_hymn.html")
+    return render_template("create_edit_hymn.html", hymn={})
+
+
+@bp.route("/<string:slug>/edit", methods=["POST", "GET"])
+def edit_hymn(slug: str):
+    db = get_db()
+    error = None
+    hymn = db.execute(
+        "SELECT title, slug, content FROM hymns WHERE slug = ?", (slug,)
+    ).fetchone()
+
+    if request.method == "POST":
+        title = request.form["title"]
+        content = request.form["content"] or ""
+
+        if not title:
+            error = "Title is required."
+
+        if error is not None:
+            flash(error)
+        else:
+            # update hymn
+            db.execute(
+                'UPDATE hymns SET title = ?, content = ? WHERE slug = ?',
+                (title, content, slug)
+            )
+            db.commit()
+            return redirect(url_for("hymns.hymn_list"))
+    return render_template("create_edit_hymn.html", edit=True, hymn=hymn)
 
 
 @bp.route("/slide/<string:slug>", methods=["GET"])

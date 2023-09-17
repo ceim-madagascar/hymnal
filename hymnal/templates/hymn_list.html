@@ -9,6 +9,7 @@
         <a href="{{ url_for('hymns.slide', slug=song['slug']) }}">
           {{ song['title'] }}
         </a> 
+        <a href="{{ url_for('hymns.edit_hymn', slug=song['slug']) }}">Edit</a>
       </li>
     {% endfor %}
   </ul>

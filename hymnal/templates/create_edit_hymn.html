@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if edit %}Edit {{ hymn['title'] }}{% else %}Create Hymn{% endif %}
+{% endblock %}
+{% block content %}
+  <form action="" method=post>
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" value="{{ hymn['title'] }}">
+    </div>
+    <div>
+      <label for="content">Content:</label>
+      <textarea rows="20" cols="50" name="content" id="content">{{ hymn['content'] }}</textarea>
+    </div>
+    <!-- submit button -->
+    {% if edit %}
+      <div><input type="submit" value="Save"></div>
+    {% else %}
+      <div><input type="submit" value="Create"></div>
+    {% endif %}
+  </form>
+{% endblock content %}
