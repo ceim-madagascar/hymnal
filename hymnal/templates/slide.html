@@ -24,9 +24,15 @@
         {% endfor %}
 			</div>
 		</div>
+
+		<!-- button that navigates back -->
+		<div id="back-button" class="display-over-slides"
+			onclick="history.back();" 
+		>
+			<img src="{{ url_for('static', filename='icons/arrow-alt-circle-left-white.svg') }}" style="width: 3rem" />
+		</div>
 		<div 
-			id="full-screen-icon"
-			class="display-over-slides"
+			id="full-screen-icon" class="display-over-slides"
 			onclick="document.querySelector('.reveal').requestFullscreen();"
 		>
 			<span class="full-screen"></span> Press 'F'
@@ -52,15 +58,21 @@
 		<style>
 			.display-over-slides {
 				z-index: 9999;
+			}
+			#back-button {
+				font-size: 3rem;
+				cursor: pointer;
 				position: fixed;
-				color: white;
-				bottom: 10px;
-				left: 10px;
-				--darkreader-inline-color: #e3e1de;
+				top: 20px;
+				left: 20px;
 			}
 			#full-screen-icon {
+				position: fixed;
+				bottom: 20px;
+				left: 20px;
 				font-size: 2rem;
 				color: #1CCECE;
+				--darkreader-inline-color: #e3e1de;
 				cursor: pointer;
 			}
 			.full-screen {
