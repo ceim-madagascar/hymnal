@@ -20,9 +20,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db
+    from . import db, commands
     db.init_app(app)
+    commands.init_app(app)
+
     from . import hymns
+
     app.register_blueprint(hymns.bp)
     app.add_url_rule("/", endpoint="hymn_list")
 
