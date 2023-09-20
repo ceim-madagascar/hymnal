@@ -19,7 +19,7 @@ bp = Blueprint("hymns", __name__)
 def hymn_list():
     db = get_db()
     songs = db.execute(
-        "SELECT title, slug, content FROM hymns ORDER BY title ASC"
+        "SELECT title, slug, content, substr(title, 1, 1) as initial FROM hymns ORDER BY title ASC"
     ).fetchall()
     return render_template("hymn_list.html", songs=songs)
 
