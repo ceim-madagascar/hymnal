@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 {% block header %}
-  <h1>{% block title %}Songs List{% endblock title %}</h1>
+  <h1>{% block title %}Hymns List{% endblock title %}</h1>
 {% endblock header %}
 {% block content %}
-  {% for initial, items in songs|groupby("initial") %}
+  {% for initial, items in hymns|groupby("initial") %}
   <h3>{{ initial }}</h3>
-  {% for song_row in items|batch(3) %}
+  {% for hymn_row in items|batch(3) %}
     <div class="row">
-      {% for song in song_row %}
-          <div class="one-third column">
-            <div>
-              <a href="{{ url_for('hymns.slide', slug=song['slug']) }}">
-                <strong>{{ song['title'] }}</strong>
-              </a> 
-              <a href="{{ url_for('hymns.edit_hymn', slug=song['slug']) }}">
-                Edit
-              </a>
-            </div>
+      {% for hymn in hymn_row %}
+        <div class="one-third column">
+          <div>
+            <a href="{{ url_for('hymns.slide', slug=hymn['slug']) }}">
+              <strong>{{ hymn['title'] }}</strong>
+            </a> &mdash; 
+            <a href="{{ url_for('hymns.edit_hymn', slug=hymn['slug']) }}">
+              Edit
+            </a>
           </div>
+        </div>
       {% endfor %}
     </div>
   {% endfor %}
