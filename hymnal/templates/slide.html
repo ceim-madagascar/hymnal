@@ -16,11 +16,20 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>{{ song['title'] }}</section>
+				<section class="r-fit-text">
+					<h2>{{ song['title'] }}</h2>
+				</section>
         {% for slide in slides %}
           <section>{% for line in slide %}{{ line }} <br>{% endfor %}</section>
         {% endfor %}
 			</div>
+		</div>
+		<div 
+			id="full-screen-icon"
+			class="display-over-slides"
+			onclick="document.querySelector('.reveal').requestFullscreen();"
+		>
+			<span class="full-screen"></span> Press 'F'
 		</div>
 
 		<script src="{{ url_for('static', filename='revealjs/dist/reveal.js') }}"></script>
@@ -33,10 +42,55 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
+				width: '80%' ,
+				height: '80%',
+				slideNumber: 'c/t',
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
 		</script>
+		<style>
+			.display-over-slides {
+				z-index: 9999;
+				position: fixed;
+				color: white;
+				bottom: 10px;
+				left: 10px;
+				--darkreader-inline-color: #e3e1de;
+			}
+			#full-screen-icon {
+				font-size: 2rem;
+				color: #1CCECE;
+				cursor: pointer;
+			}
+			.full-screen {
+				margin: 0 0 .5em 0;
+				vertical-align: middle;
+				box-sizing: border-box;
+				display: inline-block;
+				border: .1em solid currentColor;
+				width: 1em;
+				height: 1em;
+				position: relative;
+			}
+			.full-screen:before, .full-screen:after {
+				content: '';
+				background: #04233D;
+				position: absolute;
+			}
+			.full-screen:before {
+				width: .333em;
+				height: 1em;
+				left: .233em;
+				top: -.1em;
+			}
+			.full-screen:after {
+				width: 1em;
+				height: .333em;
+				top: .233em;
+				left: -.1em;
+			}
+
+		</style>
 	</body>
 </html>
