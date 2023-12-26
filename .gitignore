@@ -3,7 +3,6 @@ __pycache__/
 
 .pytest_cache/
 
-dist/
 build/
 *.DS_Store
 
@@ -11,3 +10,5 @@ public/
 .htaccess
 stderr.log
 tmp/
+
+.env
