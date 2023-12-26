@@ -3,7 +3,11 @@ import os
 from flask import Flask, render_template
 
 
+STATIC_FOLDER = os.getenv("STATIC_FOLDER", None)  # absolute path to static folder
+
+
 def create_app(test_config=None):
+
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY="dev",  # TODO: this should be loaded from env var and be different on prod
@@ -14,6 +18,9 @@ def create_app(test_config=None):
         app.config.from_pyfile("config.py", silent=True)
     else:
         app.config.from_mapping(test_config)
+
+    if STATIC_FOLDER is not None:
+        app.static_folder = STATIC_FOLDER
 
     try:
         os.makedirs(app.instance_path)
